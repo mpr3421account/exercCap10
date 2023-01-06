@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using exercCap10.Entities;
 
 /*Fazer um programa para ler os dados de N contribuintes (N fornecido pelo usuário), os quais
 podem ser pessoa física ou pessoa jurídica, e depois mostrar o valor do imposto pago por cada um,
@@ -17,3 +18,41 @@ Exemplo: uma empresa cuja renda foi 400000.00 e possui 25 funcionários, o impos
 400000 * 14% = 56000.00
 */
 
+List<TaxPayer> list = new List<TaxPayer>();
+
+Console.Write("Enter the number os tax payers: ");
+int n = int.Parse(Console.ReadLine());
+
+for(int i = 1; i <= n; i++)
+{
+    Console.Write($"Tax payer #{i} data: ");
+    Console.Write("Individual or company (i/c)?");
+    char c = char.Parse(Console.ReadLine());
+    Console.Write("Name: ");
+    string name = Console.ReadLine();
+    Console.Write("Anual Income: ");
+    double anualIncome = double.Parse(Console.ReadLine());
+    if(c == 'i')
+    {
+        Console.Write("Health expenditures: ");
+        double healthExpenditures = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+        list.Add(new Individual(name, anualIncome, healthExpenditures));
+    }
+    else
+    {
+        Console.Write("Numbe of employees: ");
+        int numberOfEmployees = int.Parse(Console.ReadLine());
+        list.Add(new Company(name,anualIncome, numberOfEmployees));
+    }
+}
+Console.WriteLine();
+double sum = 0.0;
+Console.WriteLine("TAX PAID:");
+foreach(TaxPayer tp in list)
+{
+    double tax = tp.Tax();
+    Console.WriteLine(tp.Name = ": $ " + tax.ToString("F2", CultureInfo.InvariantCulture));
+    sum += tax;
+}
+
+Console.WriteLine();
