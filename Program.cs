@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using exercCap10.Entities;
+using System.Collections.Generic;
 
 /*Fazer um programa para ler os dados de N contribuintes (N fornecido pelo usuário), os quais
 podem ser pessoa física ou pessoa jurídica, e depois mostrar o valor do imposto pago por cada um,
@@ -56,3 +57,4 @@ foreach(TaxPayer tp in list)
 }
 
 Console.WriteLine();
+Console.Write("TOTAL TAXES: $ " + sum.ToString("F2", CultureInfo.InvariantCulture));
